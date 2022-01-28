@@ -53,9 +53,11 @@
                 <button>Submit</button>
             </div>
         </form>
-        <!-- UC1: User needs to enter a valid first name, First name should start with capital letters and need to have minimum three characters-->
+        <!-- UC1: User needs to enter a -->
         <script>
-            
+            /**
+            UC 2: User needs to enter a valid first name, First name should start with capital letters and need to have minimum three characters
+            */
             const text= document.querySelector('#text');
             const textError = document.querySelector('.text-error');
             text.addEventListener('input',function(){
@@ -63,6 +65,22 @@
                 if(nameRegex.test(text.value))
                     textError.textContent = "";
                 else textError.textContent = "Name is Incorrect";
+            });
+
+            /**
+            UC 2: User needs to enter a valid email id 
+            E.g. abc.xyz@ymail.co.in
+             Email has 3 mandatory parts (abc, ymail & co) and 2 optional (xyz & in) with @ and . placed at suitable positions
+            */
+
+            const email= document.querySelector('#email');
+            const emailError = document.querySelector('.email-error');
+            text.addEventListener('input',function(){
+                let emailRegex = RegExp("([a-z0-9]{3,}|[a-z0-9]{3,}[._+-][a-zA-Z0-9]{1,})[@]{1}[a-z]{3,}[.]{1}[a-zA-Z]{2,}([.]{1}[a-zA-Z]{2})?");
+
+                if(emailRegex.test(text.value))
+                emailError.textContent = "";
+                else emailError.textContent = "Email is Incorrect";
             });
 
             const salary = document.qurySelector('#salary');

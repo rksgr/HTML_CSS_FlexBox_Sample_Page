@@ -18,6 +18,7 @@
         <div>
             <label for="pwd">Password input type:</label>
             <input type="password" id="pwd" name="pwd" required>
+            <eror-output class="pwd-error" for="pwd"></eror-output>
         </div>
         <div>
             <label for="email">Email input type:</label>
@@ -78,7 +79,7 @@
             else{emailError.textContent = "Email is Incorrect";}
         });
 
-        // UC 3: User need to follow pre-defined mobile number format
+        // UC 3: User needs to follow pre-defined mobile number format
         //           2-digit country code followed by 10-digit number
         const tel = document.querySelector('#tel');
         const telError = document.querySelector('.tel-error');
@@ -86,7 +87,18 @@
             let telregex = RegExp('[0-9]{2}[\\s][7-9]{1}[0-9]{9}');
             if(telregex.test(tel.value))
             {telError.textContent = "";}
-            else{telError.textContent = "Mobile number is Incorrect.";}
+            else{telError.textContent = "Mobile Number is Incorrect.";}
+        });
+
+        //UC 4: User needs to follow pre-defined password rule
+        //      Password should have minimum 8 characters
+        const pwd = document.querySelector('#pwd');
+        const pwdError = document.querySelector('.pwd-error');
+        pwd.addEventListener('input',function(){
+            let pwdregex = RegExp('[\\S]{8,}');
+            if(pwdregex.test(pwd.value))
+            {pwdError.textContent = "";}
+            else{pwdError.textContent = "Password is Incorrect";}
         });
 
         const salary = document.querySelector('#salary');

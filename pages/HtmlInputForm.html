@@ -90,21 +90,43 @@
             else{telError.textContent = "Mobile Number is Incorrect.";}
         });
 
-        //UC 4: User needs to follow pre-defined password rule
-        //      Password should have minimum 8 characters
+        //UC5: User needs to follow pre-defined password rule
+        //      should have minimum 8 characters,at least one upper case, 
+        //      at least one numeric number and exactly one special character
         const pwd = document.querySelector('#pwd');
         const pwdError = document.querySelector('.pwd-error');
         pwd.addEventListener('input',function(){
-            let pwdregex = RegExp('[\\S]{8,}');
-            if(pwdregex.test(pwd.value))
-            {pwdError.textContent = "";}
-            else{pwdError.textContent = "Password is Incorrect";}
+            let pwdregex8Char = RegExp('[\\S]{8,}');
+            let pwdRegexUpprCase = RegExp('[A-Z]{1,}');
+            let pwdRegexNumeric = RegExp('[0-9]{1,}');
+            let pwdRegexSplChar = RegExp('(?=.*[~!@#$%^&*_+={><?\|-]{1})');
+
+            //To ensure at least one upper case letter
+            if(!pwdRegexUpprCase.test(pwd.value))
+            {pwdError.textContent = "Atleast one upper case required!";}
+            
+            // To ensure at least one numeric number
+            else if(!pwdRegexNumeric.test(pwd.value) || !pwdRegexUpprCase.test(pwd.value))
+            {pwdError.textContent = "At least one numeric number is required!";}
+            
+            // To ensure exactly one special character
+            else if(!pwdRegexNumeric.test(pwd.value) || !pwdRegexSplChar.test(pwd.value) || !pwdRegexUpprCase.test(pwd.value))
+            {pwdError.textContent = "Exactly one special character is required!";}
+            
+
+            // To ensure minimum eight characters in the password
+            else if(!pwdregex8Char.test(pwd.value) || !pwdRegexNumeric.test(pwd.value) || !pwdRegexSplChar.test(pwd.value) 
+            || !pwdRegexUpprCase.test(pwd.value))
+            {pwdError.textContent = "Minimum eight characters should be there in password!";}
+            
+            else{pwdError.textContent = "";}
         });
+
 
         const salary = document.querySelector('#salary');
         const output = document.querySelector('.salary-output');
         output.textContent = salary.value;
-        // the value displayed beside slidebar changes on slide
+        // the value displayed beside slidebar changes on sliding
         salary.addEventListener('input',function(){
             output.textContent = salary.value;
         });
